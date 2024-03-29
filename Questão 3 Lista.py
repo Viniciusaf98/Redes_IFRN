@@ -17,7 +17,7 @@ else:
 minutos_total = minutos_chegada - minutos_partida
 segundos_h = horas_total * 3600
 segundos_m = minutos_total * 60
-tempo_da_viagem = segundos_h + segundos_m + tempo_parado
+tempo_da_viagem = segundos_h + segundos_m
 tempo_em_movimento = segundos_h + segundos_m - tempo_parado
 tempo_em_movimento_1 = tempo_em_movimento / 3600
 tempo_da_viagem_1 = tempo_da_viagem / 3600
