@@ -1,0 +1,4 @@
+New-Item file.txt
+Notepad .\file.txt
+git add *
+git commit -m "Lista 1"
