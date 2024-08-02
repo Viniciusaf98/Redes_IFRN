@@ -2,7 +2,7 @@ print('='*200)
 
 x_inicial = int(input("Informe a coordenada de X inicial : "))
 y_inicial = int(input("Informe a coordenada de Y inicial : "))
-comandos = input("Informe os comandos de movimento do robô (U, D, R, L, O, N, E, W) : ").upper()
+comandos = input("Informe os comandos de movimentos do robô (U, D, R, L, O, N, E, W) : ").upper()
 
 x_atual = x_inicial
 y_atual = y_inicial
