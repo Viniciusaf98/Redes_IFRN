@@ -49,7 +49,7 @@ for comando in comandos:
 
 print('='*200)
 print(f"Posição inicial de X foi {x_inicial} e de Y foi {y_inicial}")
-print(f"Posição final de X foi {x_atual} e de Y foi {y_inicial}")
+print(f"Posição final de X foi {x_atual} e de Y foi {y_atual}")
 print(f"Quantidade de movimentos válidos executados : {movimentos_validos}")
 print(f"Os movimentos executados foram : {movimentos_executados}")
 
