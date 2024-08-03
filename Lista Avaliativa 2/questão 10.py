@@ -16,7 +16,6 @@ while tentativas > 0 and "_" in palavra_oculta:
         continue
 
     if letra in PALAVRA_CHAVE:
-        # Atualiza a palavra oculta
         nova_palavra_oculta = ""
         for i in range(len(PALAVRA_CHAVE)):
             if PALAVRA_CHAVE[i] == letra:
