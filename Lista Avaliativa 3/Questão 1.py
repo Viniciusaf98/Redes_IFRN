@@ -1,25 +1,29 @@
 import random
 import sys
 
-try:
-    listas = int(input("Informe a quantidade de listas que a matriz terá : "))
-    elementos = int(input("Informe a quantidade de elementos em cada lista : "))
-except ValueError:
-    print("Erro! Você deve informar números inteiros.")
+listas = input("Informe a quantidade de listas que a matriz terá: ")
+elementos = input("Informe a quantidade de elementos em cada lista: ")
+
+    # Verifica se ambas as entradas são números inteiros e positivos
+if listas.isdigit() and elementos.isdigit():
+    listas = int(listas)
+    elementos = int(elementos)
+else:
+    print("Erro! Você deve informar números inteiros e positivos.")
     sys.exit()
 
-if listas <= 0 or elementos <= 0:
-    print("Erro! A quantidade de listas e elementos deve ser positiva.")
-    sys.exit()
 
+    # Cria a matriz com números aleatórios entre 0 e 100
 matriz = [[random.randint(0, 100) for _ in range(elementos)] for _ in range(listas)]
 
-print("Matriz Original : ")
+    # Exibe a matriz original
+print("Matriz Original:")
 for linha in matriz:
     print(linha)
 
+    # Calcula a matriz transposta
 matriz_transposta = [[matriz[j][i] for j in range(listas)] for i in range(elementos)]
 
-print("Matriz Transposta : ")
+print("Matriz Transposta:")
 for linha in matriz_transposta:
     print(linha)
