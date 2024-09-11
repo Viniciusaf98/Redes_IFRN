@@ -6,6 +6,13 @@ from datetime import datetime
 from tabulate import tabulate
 
 
+import requests
+import json
+import os
+from datetime import datetime
+from tabulate import tabulate
+
+
 # Obtém o ano atual
 ano_atual = datetime.now().year
 
@@ -29,9 +36,16 @@ try:
 except requests.exceptions.RequestException as e:
     print(f"Erro ao acessar a API: {e}")
     exit()
+except ValueError as e:
+    print(f"Erro ao interpretar a resposta da API como JSON: {e}")
+    exit()
 
 # Cria e exibe tabela com as moedas disponíveis
-moedas_disponiveis = [(moeda['simbolo'], moeda['nomeFormatado']) for moeda in dictMoedas['value']]
+moedas_disponiveis = [(moeda['simbolo'], moeda['nomeFormatado']) for moeda in dictMoedas.get('value', [])]
+if not moedas_disponiveis:
+    print("Nenhuma moeda foi encontrada na API.")
+    exit()
+
 tabela_moedas = tabulate(moedas_disponiveis, headers=["Sigla", "Nome da Moeda"], tablefmt="grid")
 
 print("\nMoedas Disponíveis:")
@@ -43,7 +57,7 @@ while True:
     if any(moeda_informada == moeda['simbolo'] for moeda in dictMoedas['value']):
         break
     else:
-        print("Moeda inválida. Por favor, escolha uma moeda da tabela acima .")
+        print("Moeda inválida. Por favor, escolha uma moeda da tabela acima.")
 
 # Monta a URL da API para obter as cotações da moeda informada no ano especificado
 strURL = 'https://olinda.bcb.gov.br/olinda/servico/PTAX/versao/v1/odata/'
@@ -61,6 +75,9 @@ except requests.exceptions.RequestException as e:
     print(f"Erro ao acessar a API: {e}")
     print("Por favor, tente novamente com outro ano ou moeda.")
     exit()
+except ValueError as e:
+    print(f"Erro ao interpretar a resposta da API como JSON: {e}")
+    exit()
 
 # Verifica se a resposta contém dados válidos
 if not dictCotacoes.get('value'):
@@ -70,13 +87,17 @@ if not dictCotacoes.get('value'):
 # Calcula as médias mensais de compra e venda
 medias = {}
 for cotacao in dictCotacoes['value']:
-    data = cotacao['dataHoraCotacao'].split('T')[0]
-    mes = data[5:7]
-    if mes not in medias:
-        medias[mes] = {'mediaCompra': [], 'mediaVenda': []}
-    if cotacao['cotacaoCompra'] is not None and cotacao['cotacaoVenda'] is not None:
-        medias[mes]['mediaCompra'].append(cotacao['cotacaoCompra'])
-        medias[mes]['mediaVenda'].append(cotacao['cotacaoVenda'])
+    try:
+        data = cotacao['dataHoraCotacao'].split('T')[0]
+        mes = data[5:7]
+        if mes not in medias:
+            medias[mes] = {'mediaCompra': [], 'mediaVenda': []}
+        if cotacao['cotacaoCompra'] is not None and cotacao['cotacaoVenda'] is not None:
+            medias[mes]['mediaCompra'].append(float(cotacao['cotacaoCompra']))
+            medias[mes]['mediaVenda'].append(float(cotacao['cotacaoVenda']))
+    except (KeyError, ValueError) as e:
+        print(f"Erro ao processar dados de cotação: {e}")
+        continue
 
 # Calcula as médias para cada mês e arredonda para 5 casas decimais
 medias_calculadas = {}
@@ -116,6 +137,9 @@ try:
 except IOError as e:
     print(f"Erro ao salvar o arquivo CSV: {e}")
     exit()
+
+print("Processo concluído com sucesso.")
+
 
 # Exibe um gráfico de linha com as médias de compra e venda ao longo dos meses (Caso apareça apenas uma linha, recomendo utilizar o zoom pois os números são bem próximos)
 meses = sorted(medias_calculadas.keys())
