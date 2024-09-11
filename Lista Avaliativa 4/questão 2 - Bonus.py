@@ -76,13 +76,13 @@ while escalacao_escolhida < 1 or escalacao_escolhida > 7:
 
 # Definindo as posições e quantidades de jogadores por posição para cada esquema tático
 esquemas_taticos = {
-    '3-4-3': {'goleiro': 1, 'zagueiro': 3, 'lateral': 0, 'meia': 4, 'atacante': 3, 'tecnico': 1},
-    '3-5-2': {'goleiro': 1, 'zagueiro': 3, 'lateral': 0, 'meia': 5, 'atacante': 2, 'tecnico': 1},
-    '4-3-3': {'goleiro': 1, 'zagueiro': 2, 'lateral': 2, 'meia': 3, 'atacante': 3, 'tecnico': 1},
-    '4-4-2': {'goleiro': 1, 'zagueiro': 2, 'lateral': 2, 'meia': 4, 'atacante': 2, 'tecnico': 1},
-    '4-5-1': {'goleiro': 1, 'zagueiro': 2, 'lateral': 2, 'meia': 5, 'atacante': 1, 'tecnico': 1},
-    '5-3-2': {'goleiro': 1, 'zagueiro': 3, 'lateral': 2, 'meia': 3, 'atacante': 2, 'tecnico': 1},
-    '5-4-1': {'goleiro': 1, 'zagueiro': 3, 'lateral': 2, 'meia': 4, 'atacante': 1, 'tecnico': 1},
+    '3-4-3': {'Goleiro': 1, 'Zagueiro': 3, 'Lateral': 0, 'Meia': 4, 'Atacante': 3, 'Tecnico': 1},
+    '3-5-2': {'Goleiro': 1, 'Zagueiro': 3, 'Lateral': 0, 'Meia': 5, 'Atacante': 2, 'Tecnico': 1},
+    '4-3-3': {'Goleiro': 1, 'Zagueiro': 2, 'Lateral': 2, 'Meia': 3, 'Atacante': 3, 'Tecnico': 1},
+    '4-4-2': {'Goleiro': 1, 'Zagueiro': 2, 'Lateral': 2, 'Meia': 4, 'Atacante': 2, 'Tecnico': 1},
+    '4-5-1': {'Goleiro': 1, 'Zagueiro': 2, 'Lateral': 2, 'Meia': 5, 'Atacante': 1, 'Tecnico': 1},
+    '5-3-2': {'Goleiro': 1, 'Zagueiro': 3, 'Lateral': 2, 'Meia': 3, 'Atacante': 2, 'Tecnico': 1},
+    '5-4-1': {'Goleiro': 1, 'Zagueiro': 3, 'Lateral': 2, 'Meia': 4, 'Atacante': 1, 'Tecnico': 1},
 }
 
 # Escolha do esquema tático
@@ -94,12 +94,12 @@ selecionados = {}
 
 for posicao, quantidade in quantidade_posicoes.items():
     posicao_id = {
-        'goleiro': 1,
-        'zagueiro': 3,
-        'lateral': 2,
-        'meia': 4,
-        'atacante': 5,
-        'tecnico': 6
+        'Goleiro': 1,
+        'Zagueiro': 3,
+        'Lateral': 2,
+        'Meia': 4,
+        'Atacante': 5,
+        'Tecnico': 6
     }[posicao]
     
     jogadores = [atleta for atleta in dictCartola['atletas'] if atleta['posicao_id'] == posicao_id]
@@ -150,7 +150,7 @@ except IOError:
 # Exibindo a seleção final em uma tabela
 print("\nSeleção do Cartola FC:")
 tabela_selecao = []
-for posicao in ['goleiro', 'zagueiro', 'lateral', 'meia', 'atacante', 'tecnico']:
+for posicao in ['Goleiro', 'Zagueiro', 'Lateral', 'Meia', 'Atacante', 'Tecnico']:
     if posicao in selecionados:
         for atleta in selecionados[posicao]:
             clube_id = str(atleta['clube_id'])
