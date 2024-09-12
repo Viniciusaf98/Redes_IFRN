@@ -141,8 +141,8 @@ for posicao, atletas in selecionados.items():
 
 # Salvando o dicionário em JSON
 try:
-    with open(f'cartola_selecao_{esquema_selecionado}_{ano_informado}.json', 'w') as outfile:
-        json.dump(cartola_selecao, outfile, indent=4)
+    with open(f'cartola_selecao_{esquema_selecionado}_{ano_informado}.json', 'w', encoding='utf-8') as outfile:
+        json.dump(cartola_selecao, outfile, indent=4, ensure_ascii=False, )
 except IOError:
     print("Erro ao salvar o arquivo JSON.")
     exit()
