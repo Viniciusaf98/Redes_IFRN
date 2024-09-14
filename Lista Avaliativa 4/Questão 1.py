@@ -5,10 +5,8 @@ from datetime import datetime
 from tabulate import tabulate
 
 
-# Obtém o ano atual
 ano_atual = datetime.now().year
 
-# Solicita ao usuário o ano desejado, garantindo que esteja no intervalo permitido
 while True:
     ano_informado = input(f"Informe o ano desejado (entre 1985 e {ano_atual}): ")
     if ano_informado.isdigit() and 1985 <= int(ano_informado) <= ano_atual:
